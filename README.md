@@ -4,9 +4,9 @@
 
 This README provides an overview of the Employee Attendance Analysis Database, we as group 5  did designed to store information of employees and records attendance list of employee then after analysis it using procedure where input parameter is month and year then show you results . We created two tables namely; 'Emplyoyess' table and 'Attendance' table. and procedure called 'Calculate_attendance'
 
-##Table Structures
+## Table Structures
 
-###Employee table
+### Employee table
 ``` sql
 CREATE TABLE employees (
     employee_id NUMBER PRIMARY KEY, -- primary key column
@@ -14,7 +14,7 @@ CREATE TABLE employees (
     last_name VARCHAR2(50)
 );
 ```
-###Attendance table
+### Attendance table
 ```sql
 CREATE TABLE attendance (
     attendance_id NUMBER PRIMARY KEY, --primary key column
@@ -28,9 +28,9 @@ CREATE TABLE attendance (
         CHECK (status IN ('Present', 'Absent')) -- constraint to check input matches with given
 );
 ```
-##Inserting Records
+## Inserting Records
 
-###insert Employee
+### insert Employee
 ```sql
 INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(101,'Ishimwe','Emile')  
 INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(102,'Ndahiriwe','Bienfait')
@@ -39,7 +39,7 @@ INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(104,'Habimana'
 INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(105,'Stella','Stella')
 ```
 
-###Insert Attendance
+### Insert Attendance
 ```sql
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('1', '101', TO_DATE('2024-10-30 07:35:20', 'YYYY-MM-DD HH24:MI:SS'), 'Present')
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('2', '102', TO_DATE('2024-10-30 07:35:38', 'YYYY-MM-DD HH24:MI:SS'), 'Present')
@@ -52,8 +52,8 @@ INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VAL
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('9', '104', TO_DATE('2024-10-31 07:39:24', 'YYYY-MM-DD HH24:MI:SS'), 'Present')
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('10', '105', TO_DATE('2024-10-31 07:39:36', 'YYYY-MM-DD HH24:MI:SS'), 'Present')
 ```
-###Conceptual, Logical and Physical Data Model
-##PROCEDURE Calculate_attendance
+### Conceptual, Logical and Physical Data Model
+## PROCEDURE Calculate_attendance
 ```sql
 CREATE OR REPLACE PROCEDURE calculate_attendance_
 ( p_month IN NUMBER, p_year IN NUMBER) AS
@@ -114,7 +114,7 @@ EXCEPTION
 END calculate_attendance;
 /
 ```
-###Conclusion 
+### Conclusion 
 this Employee atendance analysis database was done according to Task give where 
 task 1: You are required to create a PL/SQL procedure that performs the following tasks:
 1. Calculate Attendance Statistics:
