@@ -1,5 +1,5 @@
 # Group5-Assgniment-plsql
-<U>#Employee Attendance Analysis Database</U>
+# Employee Attendance Analysis Database
 
 
 This README provides an overview of the Employee Attendance Analysis Database, we as group 5  did designed to store information of employees and records attendance list of employee then after analysis it using procedure where input parameter is month and year then show you results . We created two tables namely; 'Emplyoyess' table and 'Attendance' table. and procedure called 'Calculate_attendance'
@@ -10,8 +10,8 @@ This README provides an overview of the Employee Attendance Analysis Database, w
 ``` sql
 CREATE TABLE employees (
     employee_id NUMBER PRIMARY KEY, -- primary key column
-    first_name VARCHAR2(50),
-    last_name VARCHAR2(50)
+    first_name VARCHAR2(20),
+    last_name VARCHAR2(20)
 );
 ```
 ### Attendance table
@@ -23,20 +23,20 @@ CREATE TABLE attendance (
     status VARCHAR2(10),
     CONSTRAINT fk_employee
      FOREIGN KEY (employee_id)  
-     REFERENCES employees(employee_id), -- foreign key column referenced from employye table
+     REFERENCES employees(employee_id), -- foreign key column referenced from employye table (employee_id)
     CONSTRAINT chk_status
-        CHECK (status IN ('Present', 'Absent')) -- constraint to check input matches with given
+        CHECK (status IN ('Present', 'Absent')) -- constraint to check input matches with given 'Present' or 'Absent'
 );
 ```
 ## Inserting Records
 
 ### insert Employee
 ```sql
-INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(101,'Ishimwe','Emile')  
-INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(102,'Ndahiriwe','Bienfait')
-INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(103,'Arihafi','Moise')
-INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(104,'Habimana','Daniel')
-INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES(105,'Stella','Stella')
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES (101,'Ishimwe','Emile')  
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES (102,'Ndahiriwe','Bienfait')
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES (103,'Arihafi','Moise')
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES (104,'Habimana','Daniel')
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES (105,'Stella','Stella')
 ```
 
 ### Insert Attendance
@@ -55,45 +55,60 @@ INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VAL
 ### Conceptual, Logical and Physical Data Model
 ## PROCEDURE Calculate_attendance
 ```sql
-CREATE OR REPLACE PROCEDURE calculate_attendance_
-( p_month IN NUMBER, p_year IN NUMBER) AS
-  CURSOR emp_cursor IS
-    SELECT employee_id, first_name, last_name
-    FROM employees;
-    
+CREATE OR REPLACE PROCEDURE calculate_attendance_ (
+    p_month IN NUMBER,
+    p_year IN NUMBER
+) AS
+    -- Declare cursor to fetch all employees
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name
+        FROM employees;
+        
+    -- Variables to hold attendance statistics
     v_total_presents NUMBER;
     v_total_absents NUMBER;
     v_attendance_percentage NUMBER;
     v_total_days_in_month NUMBER;
-    v_full_name VARCHAR2(100);
+    v_full_name VARCHAR2(20);
     
+    -- Record type to hold cursor results
     emp_rec emp_cursor%ROWTYPE;
+    
+    -- Cursor to fetch attendance records for each employee
     CURSOR att_cursor (c_emp_id NUMBER) IS
         SELECT status
         FROM attendance
         WHERE employee_id = c_emp_id
-            AND EXTRACT(MONTH FROM attendance_date) = p_month
+          AND EXTRACT(MONTH FROM attendance_date) = p_month
           AND EXTRACT(YEAR FROM attendance_date) = p_year;
+    
+    -- Record type to hold cursor results
     att_rec att_cursor%ROWTYPE;
 BEGIN
+    -- Loop through each employee
     FOR emp_rec IN emp_cursor LOOP
         v_total_presents := 0;
         v_total_absents := 0;
         v_full_name := emp_rec.first_name || ' ' || emp_rec.last_name;
+        
+        -- Open attendance cursor for current employee
         OPEN att_cursor(emp_rec.employee_id);
         LOOP
             FETCH att_cursor INTO att_rec;
             EXIT WHEN att_cursor%NOTFOUND;
             
+            -- Count presents and absents
             IF att_rec.status = 'Present' THEN
                 v_total_presents := v_total_presents + 1;
             ELSIF att_rec.status = 'Absent' THEN
                 v_total_absents := v_total_absents + 1;
             END IF;
         END LOOP;
-        CLOSE att_cursor;     
+        CLOSE att_cursor;
+        
         v_total_days_in_month := v_total_presents + v_total_absents;
         
+        -- Calculate and display attendance statistics
         IF v_total_days_in_month > 0 THEN
             v_attendance_percentage := (v_total_presents / v_total_days_in_month) * 100;
             
@@ -108,28 +123,36 @@ BEGIN
         
         DBMS_OUTPUT.PUT_LINE('------------------------------------');
     END LOOP;
+
 EXCEPTION
+    -- Handle any unexpected errors
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: ' || SQLERRM);
-END calculate_attendance;
+END calculate_attendance_;
 /
+
 ```
 ### Conclusion 
 this Employee atendance analysis database was done according to Task give where 
+
 task 1: You are required to create a PL/SQL procedure that performs the following tasks:
-1. Calculate Attendance Statistics:
-▪Accept month and year as input parameters to filter attendance records.
-▪Loop through all employees using a FOR loop to retrieve their attendance records for the specified month.
-▪For each employee, use a WHILE loop to count the total number of days marked as 'Present' and 'Absent' during that month.
+<p>1. Calculate Attendance Statistics:</p>
+<li>Accept month and year as input parameters to filter attendance records.</li>
+<li>Loop through all employees using a FOR loop to retrieve their attendance records for the specified month.</li>
+<li>For each employee, use a WHILE loop to count the total number of days marked as 'Present' and 'Absent' during that month.</li>
 
-2. Display Results:
+<p> </p>
+<p>2. Display Results:</p>
 For each employee, display the following information:
-▪Full name (first and last name)
-▪Total presents
-▪Total absents
-▪Attendance Percentage = (Total Presents/Total Days in the Month) x 100
+<li>Full name (first and last name)</li>
+<li>Total presents</li>
+<li>Total absents</li>
+<li>Attendance Percentage = (Total Presents/Total Days in the Month) x 100</li>
 
-###Reference 
+### Reference 
+this site used for getting more expalanation about sql syntax
+https://www.geeksforgeeks.org/
+
 
 
 
