@@ -10,23 +10,24 @@ This README provides an overview of the Employee Attendance Analysis Database, w
 ``` sql
 CREATE TABLE employees (
     employee_id NUMBER PRIMARY KEY, -- primary key column
-    first_name VARCHAR2(20),
-    last_name VARCHAR2(20)
+    first_name VARCHAR2(20),        -- First name of the employee, up to 20 characters
+    last_name VARCHAR2(20)          -- Last name of the employee, up to 20 characters
 );
 ```
 ### Attendance table
 ```sql
 CREATE TABLE attendance (
-    attendance_id NUMBER PRIMARY KEY, --primary key column
-    employee_id NUMBER,
-    attendance_date DATE,
-    status VARCHAR2(10),
-    CONSTRAINT fk_employee
-     FOREIGN KEY (employee_id)  
-     REFERENCES employees(employee_id), -- foreign key column referenced from employye table (employee_id)
-    CONSTRAINT chk_status
-        CHECK (status IN ('Present', 'Absent')) -- constraint to check input matches with given 'Present' or 'Absent'
+    attendance_id NUMBER PRIMARY KEY,   -- Unique identifier for each attendance record
+    employee_id NUMBER,                 -- Reference to the employee_id from employees table
+    attendance_date DATE,               -- Date of the attendance
+    status VARCHAR2(10),                -- Status of the attendance ('Present' or 'Absent')
+    CONSTRAINT fk_employee              -- Constraint to ensure employee_id exists in employees table
+        FOREIGN KEY (employee_id) 
+        REFERENCES employees(employee_id),
+    CONSTRAINT chk_status               -- Constraint to ensure status is either 'Present' or 'Absent'
+        CHECK (status IN ('Present', 'Absent'))
 );
+
 ```
 ## Inserting Records
 
