@@ -2,7 +2,7 @@
 # Employee Attendance Analysis Database
 
 
-This README provides an overview of the Employee Attendance Analysis Database, we as group 5  did designed to store information of employees and records attendance list of employee then after analysis it using procedure where input parameter is month and year then show you results . We created two tables namely; 'Emplyoyess' table and 'Attendance' table. and procedure called 'Calculate_attendance'
+This README provides an overview of the Employee Attendance Analysis Database, we as group 5  did designed to store information of employees and records attendance list of employee then after analysis it using procedure where input parameter is month and year then show you results . We created two tables namely; 'Emplyoyess' table and 'Attendance' table. and procedure called 'Calculate_attendance_statistics'
 
 ## Table Structures
 
@@ -57,7 +57,7 @@ INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VAL
 ## PROCEDURE Calculate_attendance
 ```sql
 -- Set the name and parameters of the procedure
-CREATE OR REPLACE PROCEDURE calculate_attendance_ (
+CREATE OR REPLACE PROCEDURE calculate_attendance_statistics (
     p_month IN NUMBER,   -- Input parameter for the month
     p_year IN NUMBER     -- Input parameter for the year
 ) AS
@@ -139,10 +139,19 @@ EXCEPTION
     WHEN OTHERS THEN
         -- Handle any unexpected errors
         DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: ' || SQLERRM);
-END calculate_attendance_;
+END calculate_attendance_statistics;
 /
+```
+### Displaying Results
+syntax for displaying the results.
+```sql
+SET SERVEROUTPUT ON;
 
+BEGIN
+    calculate_attendance_statistics(10, 2024); -- Example for october 2024
+END;
 
+/
 ```
 ### Conclusion 
 this Employee atendance analysis database was done according to Task give where 
