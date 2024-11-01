@@ -1,7 +1,7 @@
 CREATE TABLE employees (
     employee_id NUMBER PRIMARY KEY,   -- Unique identifier for each employee
-    first_name VARCHAR2(50),          -- First name of the employee, up to 50 characters
-    last_name VARCHAR2(50)            -- Last name of the employee, up to 50 characters
+    first_name VARCHAR2(50),          -- First name of the employee, up to 20 characters
+    last_name VARCHAR2(50)            -- Last name of the employee, up to 20 characters
 );
 
 
