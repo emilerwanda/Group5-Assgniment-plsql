@@ -23,7 +23,7 @@ CREATE TABLE attendance (
     status VARCHAR2(10),                -- Status of the attendance ('Present' or 'Absent')
     CONSTRAINT fk_employee              -- Constraint to ensure employee_id exists in employees table
         FOREIGN KEY (employee_id) 
-        REFERENCES employees(employee_id),
+        REFERENCES employees(employee_id), --references
     CONSTRAINT chk_status               -- Constraint to ensure status is either 'Present' or 'Absent'
         CHECK (status IN ('Present', 'Absent'))
 );
