@@ -1,4 +1,4 @@
-```sql
+
 -- Set the name and parameters of the procedure
 CREATE OR REPLACE PROCEDURE calculate_attendance_ (
     p_month IN NUMBER,   -- Input parameter for the month
@@ -84,4 +84,4 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: ' || SQLERRM);
 END calculate_attendance_;
 /
-```
+
