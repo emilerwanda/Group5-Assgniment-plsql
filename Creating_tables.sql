@@ -5,7 +5,7 @@ CREATE TABLE employees (
 );
 
 
-CREATE TABLE attendance (
+CREATE TABLE attendance ( 
     attendance_id NUMBER PRIMARY KEY,   -- Unique identifier for each attendance record
     employee_id NUMBER,                 -- Reference to the employee_id from employees table
     attendance_date DATE,               -- Date of the attendance
