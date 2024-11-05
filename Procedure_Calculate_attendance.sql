@@ -82,6 +82,8 @@ EXCEPTION
     WHEN OTHERS THEN
         -- Handle any unexpected errors
         DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: ' || SQLERRM);
+        DBMS_OUT.PUT_LINE('Error  code' || SQLERRCODE);
+
 END calculate_attendance_;
 /
 
