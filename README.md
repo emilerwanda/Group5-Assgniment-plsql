@@ -7,7 +7,7 @@ This README provides an overview of the Employee Attendance Analysis Database, w
 ## Table Structures
 
 ### Employee table
-``` sql
+``` sql 
 CREATE TABLE employees (
     employee_id NUMBER PRIMARY KEY, -- primary key column
     first_name VARCHAR2(20),        -- First name of the employee, up to 20 characters
@@ -41,7 +41,7 @@ INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME) VALUES (105,'Stella',
 ```
 
 ### Insert Attendance
-```sql
+```sql 
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('1', '101', TO_DATE('2024-10-30 07:35:20', 'YYYY-MM-DD HH24:MI:SS'), 'Present')
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('2', '102', TO_DATE('2024-10-30 07:35:38', 'YYYY-MM-DD HH24:MI:SS'), 'Present')
 INSERT INTO ATTENDANCE (ATTENDANCE_ID, EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) VALUES ('3', '103', TO_DATE('2024-10-30 07:35:50', 'YYYY-MM-DD HH24:MI:SS'), 'Absent')
@@ -154,7 +154,7 @@ END;
 /
 ```
 ### Conclusion 
-this Employee atendance analysis database was done according to Task give where 
+this Employee atendance analysis database was done according to Task give where ;
 
 task 1: You are required to create a PL/SQL procedure that performs the following tasks:
 <p>1. Calculate Attendance Statistics:</p>
@@ -171,9 +171,10 @@ For each employee, display the following information:
 <li>Attendance Percentage = (Total Presents/Total Days in the Month) x 100</li>
 
 ### Reference 
-this site used for getting more expalanation about sql syntax
-https://www.geeksforgeeks.org/
+this site used for getting more expalanation about sql syntax 
 
+https://www.geeksforgeeks.org/
+             
 
 
 
